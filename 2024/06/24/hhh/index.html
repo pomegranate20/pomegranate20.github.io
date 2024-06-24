@@ -248,7 +248,16 @@
 <p>注意：连接 LED 灯时，要注意正负极。</p>
 <h3 id="4-实验原理"><a href="#4-实验原理" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>Arduino 的数字管脚只能读取两种状态：<strong>有电压</strong>和<strong>没有电压</strong> 。这种类型的输入一般叫数字信号输入。有电压和没有电压一般使用 HIGH (高电平)和 LOW (低电平)来表示(有时也用真假，数字1和0来表示高电平和低电平)。 HIGH 代表“有电压”。 LOW 代表“没有电压”。当想让一个输出管脚输出 HIGH ，需要使用<code>digitalWrite()</code>这个函数。当运行后，这个数字管脚与地之间有 5 V 的电压（电位差）。当让一个输出管脚输出 LOW ，则会关闭输出。</p>
 <p>Arduino 的数字式管脚既可以作为输入，也可以作为输出。可以在代码中根据函数来配置它们。当管脚是输出时，可以使用它打开像LED这样的器件。如果配置管脚作为输入，能检查开关是否被按下。因为管脚 0 和 1 已经被用来和计算机通信，最好从管脚2开始使用。</p>
-<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A(开始) --&gt; B[初始化引脚模式]</span><br><span class="line">    B --&gt; C[读取按键状态]</span><br><span class="line">    C --&gt; D&#123;按键被按下？&#125;</span><br><span class="line">    D -- 否 --&gt; E[绿色LED点亮]</span><br><span class="line">    E --&gt; F[红色LED1熄灭]</span><br><span class="line">    F --&gt; G[红色LED2熄灭]</span><br><span class="line">    G --&gt; C</span><br><span class="line">    D -- 是 --&gt; H[执行相关亮灭操作]</span><br><span class="line">    H --&gt; C</span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化引脚模式]
+    B --> C[读取按键状态]
+    C --> D{按键被按下？}
+    D -- 否 --> E[绿色LED点亮]
+    E --> F[红色LED1熄灭]
+    F --> G[红色LED2熄灭]
+    G --> C
+    D -- 是 --> H[执行相关亮灭操作]
+    H --> C</pre>
 
 
 
@@ -290,7 +299,25 @@
 <h3 id="4-实验原理-1"><a href="#4-实验原理-1" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>即使Arduino是一个数字工具，它也能够从模拟传感器获取例如温度或光照强度等测量信息。要实现这一点，我们需要使用Arduino内置的模数转换器（ADC）。模拟引脚 A0 至 A5 能够提供0至1023范围内的数值，这些数值可以对应映射到0伏至5伏的电压范围内。</p>
 <p>我们将使用一个温度传感器来测量皮肤的温度。这种传感器会根据检测到的温度变化输出不同的电压值。它具有三个引脚：一个连接到地线，另一个连接到电源，第三个则输出一个变化的电压至 Arduino 。在这个项目中，我们将读取传感器的输出电压，并利用这个电压来控制 LED 的亮灭，以此表示温度的变化。市面上有多种类型的温度传感器，其中 TMP36 因其输出电压与摄氏度温度成正比的特性而非常方便使用。</p>
 <p>Arduino IDE内置了一个名为串口监视器的工具，它允许我们从微控制器接收反馈信息。通过串口监视器，我们可以获取传感器状态的实时信息，并了解在代码运行过程中电路的工作情况。</p>
-<h3 id="5-实验代码-1"><a href="#5-实验代码-1" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A(开始) --&gt; B[初始化串口通信]</span><br><span class="line">    B --&gt; C[设置引脚2到引脚4为输出，</span><br><span class="line">并置为低电平]</span><br><span class="line">    C --&gt; E[读取、打印传感器值]</span><br><span class="line">    E --&gt; G[转换为电压值]</span><br><span class="line">    G --&gt; I[转化为温度值]</span><br><span class="line">    I --&gt; J&#123;温度区间&#125;</span><br><span class="line">    J -- &lt;20℃ --&gt; K[熄灭所有LED]</span><br><span class="line">    J -- 20℃-22℃ --&gt; L[点亮LED1]</span><br><span class="line">    L --&gt; M[熄灭LED2和LED3]</span><br><span class="line">    J -- 22℃-24℃ --&gt; N[点亮LED1和LED2]</span><br><span class="line">    N --&gt; O[熄灭LED3]</span><br><span class="line">    J -- &gt;24℃ --&gt; P[点亮所有LED]</span><br><span class="line">    K --&gt; Q[延时1ms]</span><br><span class="line">    M --&gt; Q</span><br><span class="line">    O --&gt; Q</span><br><span class="line">    P --&gt; Q</span><br><span class="line">    Q --&gt; E</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码-1"><a href="#5-实验代码-1" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化串口通信]
+    B --> C[设置引脚2到引脚4为输出，
+并置为低电平]
+    C --> E[读取、打印传感器值]
+    E --> G[转换为电压值]
+    G --> I[转化为温度值]
+    I --> J{温度区间}
+    J -- <20℃ --> K[熄灭所有LED]
+    J -- 20℃-22℃ --> L[点亮LED1]
+    L --> M[熄灭LED2和LED3]
+    J -- 22℃-24℃ --> N[点亮LED1和LED2]
+    N --> O[熄灭LED3]
+    J -- >24℃ --> P[点亮所有LED]
+    K --> Q[延时1ms]
+    M --> Q
+    O --> Q
+    P --> Q
+    Q --> E</pre>
 
 
 
@@ -340,7 +367,17 @@
 <p>迅速地改变管脚的电平可以实现我们改变输出电压的目的，进而调整 LED 的亮度。在一个周期中管脚电压高电平的时间所占的比例被称为占空比。Arduino Uno 有6个管脚可以被用来作为 PWM (数字管脚3,5,6,9,10和17)。在这个项目中，我们将使用光敏电阻(一种根据照射到它们表面的光强度来改变自身电阻的传感器)作为输入。如果我们将光敏电阻的一端连接到 Arduino 上，我们将可以通过检查管脚上的电压值来测试光敏电阻的阻值变化。</p>
 <p>该实验中所使用的 4引线 LED 具有4条引线，是一个共阴极 RGB LED。它内部包含独立的红色、绿色和蓝色发光元件，以及一个共用的地线（负极）。通过调整 Arduino 的 PWM （脉冲宽度调制）引脚（通过220欧姆的电阻接到阳极）与阴极之间的电压，可以控制LED三种颜色光线的亮度。</p>
 <h3 id="5-实验代码-2"><a href="#5-实验代码-2" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><p><img src="https://s2.loli.net/2024/06/24/zxKud9XGoA32gQ6.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A(开始) --&gt; B[初始化串行通信]</span><br><span class="line">    B --&gt; C[设置LED引脚</span><br><span class="line">为输出模式]</span><br><span class="line">    C --&gt; D[读取红绿蓝</span><br><span class="line">三个传感器的值]</span><br><span class="line">    D --&gt; I[输出原始传感器数值]</span><br><span class="line">    I --&gt; J[将传感器值缩小四倍]</span><br><span class="line">    J --&gt; L[输出映射后的传感器值，</span><br><span class="line">设置LED亮度]</span><br><span class="line">    L --&gt; D</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph TD;
+    A(开始) --> B[初始化串行通信]
+    B --> C[设置LED引脚
+为输出模式]
+    C --> D[读取红绿蓝
+三个传感器的值]
+    D --> I[输出原始传感器数值]
+    I --> J[将传感器值缩小四倍]
+    J --> L[输出映射后的传感器值，
+设置LED亮度]
+    L --> D</pre>
 
 
 
@@ -384,7 +421,15 @@
 <h3 id="4-实验原理-3"><a href="#4-实验原理-3" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>舵机是一种特殊的马达，不是整周旋转，而是移动到一个具体位置并且固定那里，直到其再次接收到移动的指令。舵机通常只转动 180 度（半圈）。电位器是一种分压器，当转动其旋钮时，可以改变中间引脚上的电压比例，从而经过映射，能够调整模拟信号输入引脚0的电压。利用这个原理，可以实现对于舵机位置的控制。</p>
 <p>在制作彩色混合灯时，我们可以通过对发光二极管（LED）进行脉冲宽度调制（PWM）来控制其亮度。同样，舵机也需要接收脉冲信号来指示它们应该转动到哪个角度。这些脉冲信号以固定的间隔发送，但其宽度会在1000微秒到2000微秒之间变化。</p>
 <p>我们可以编写代码来生成这些脉冲，而且 Arduino 软件提供了 Servo 库，使得控制舵机变得更加简单。由于舵机的转动范围限制在180度，而模拟信号的输入范围是0到1023，因此我们需要使用一个名为<code>map()</code>的函数来调整从电位器读取的值，以适应这个范围。</p>
-<h3 id="5-实验代码-3"><a href="#5-实验代码-3" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A(开始) --&gt; B[初始化舵机和串行通信]</span><br><span class="line">    B --&gt; C[读取模拟输入引脚值]</span><br><span class="line">    C --&gt; D[输出模拟输入值]</span><br><span class="line">    D --&gt; E[将输入值映射到角度]</span><br><span class="line">    E --&gt; F[输出角度值]</span><br><span class="line">    F --&gt; G[将舵机转到映射角度]</span><br><span class="line">    G --&gt; H[延迟15ms]</span><br><span class="line">    H --&gt; C</span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码-3"><a href="#5-实验代码-3" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化舵机和串行通信]
+    B --> C[读取模拟输入引脚值]
+    C --> D[输出模拟输入值]
+    D --> E[将输入值映射到角度]
+    E --> F[输出角度值]
+    F --> G[将舵机转到映射角度]
+    G --> H[延迟15ms]
+    H --> C</pre>
 
 
 
@@ -444,7 +489,15 @@
 <p>注意：连接 二极管时，要注意正负极。要注意共地。</p>
 <h3 id="4-实验原理-4"><a href="#4-实验原理-4" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p><strong>晶体管</strong>是一种半导体器件，它允许我们使用Arduino的微小电流输出来控制较大的电流和高电压电源。尽管晶体管有多种类型，但它们的基本原理是相同的。可以将晶体管想象成一个数字开关。当向晶体管的栅极管脚提供电压时，它将控制源极和漏极之间的电路连接。这样，我们就可以使用Arduino来控制大电流或高电压的电机了。</p>
 <p>电机是一种利用电磁感应原理工作的装置。电磁感应是通过改变导线中的电流来在导线周围产生变化磁场的过程。当电机通电时，内部的铜线圈就会产生一个磁场。这个磁场使得传动轴旋转起来。</p>
-<h3 id="5-实验代码-4"><a href="#5-实验代码-4" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">A(开始) --&gt; B[设置 motorPin 为输出]</span><br><span class="line">B --&gt; C[设置 switchPin 为输入]</span><br><span class="line">C --&gt; D[读取开关状态到 switchState]</span><br><span class="line">D --&gt; E&#123;switchState == HIGH?&#125;</span><br><span class="line">E -- 是 --&gt; F[启动电机]</span><br><span class="line">E -- 否 --&gt; G[关闭电机]</span><br><span class="line">F &amp; G --&gt; H[等待一段时间]</span><br><span class="line">H --&gt; D</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码-4"><a href="#5-实验代码-4" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+A(开始) --> B[设置 motorPin 为输出]
+B --> C[设置 switchPin 为输入]
+C --> D[读取开关状态到 switchState]
+D --> E{switchState == HIGH?}
+E -- 是 --> F[启动电机]
+E -- 否 --> G[关闭电机]
+F & G --> H[等待一段时间]
+H --> D</pre>
 
 
 
@@ -499,7 +552,31 @@
 <h3 id="4-实验原理-5"><a href="#4-实验原理-5" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>在这个项目中，我们将亲手制作自己的幻影箱。我们将用一个电机来驱动它旋转。</p>
 <p>为了让这个系统更加高级，我们会增添一些控制功能：一个开关用于控制电机的旋转方向，另一个开关用于控制电机的电源供应，还有一个电位器用来调节电机的转速。在电动纸风车项目中，电机只能单向旋转。如果我们改变电机的电源和地线，电机就会反向旋转。然而，手动改变电机的旋转方向在实际操作中并不方便，因此我们将使用一种名为H桥的装置来实现这一功能。H桥是一种集成电路芯片（IC）。集成电路是一种将大量电路集成在一个小封装内的器件。它们便于安装，并且能够简化复杂的电路设计。</p>
 <p>我们可以通过 IC 外部的引脚来访问其内部的电路。不同的 IC 有不同的引脚数量，但并非所有引脚都会在电路中使用。有时，使用数字而非功能来标识这些引脚更为方便。观察 IC 时，有凹槽的一面是顶部。我们可以通过从左上角开始，沿着U型方向计数来识别引脚编号。</p>
-<h3 id="5-实验代码-5"><a href="#5-实验代码-5" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A(开始) --&gt; B[初始化设置]</span><br><span class="line">    B --&gt; C&#123;主循环&#125;</span><br><span class="line">    C --&gt; D[读取电机开关状态]</span><br><span class="line">    D --&gt; E[读取电机方向开关状态]</span><br><span class="line">    E --&gt; F[读取电位器输入值]</span><br><span class="line">    F --&gt; G&#123;电机开关状态改变?&#125;</span><br><span class="line">    G -- 是 --&gt; H&#123;电机开关打开?&#125;</span><br><span class="line">    H -- 是 --&gt; I[切换电机使能状态]</span><br><span class="line">    H -- 否 --&gt; J[保持电机使能状态]</span><br><span class="line">    G -- 否 --&gt; J</span><br><span class="line">    J --&gt; K&#123;电机方向开关状态改变?&#125;</span><br><span class="line">    K -- 是 --&gt; L&#123;电机方向开关被触发?&#125;</span><br><span class="line">    L -- 是 --&gt; M[切换电机方向]</span><br><span class="line">    L -- 否 --&gt; N[保持电机方向]</span><br><span class="line">    K -- 否 --&gt; N</span><br><span class="line">    N --&gt; O&#123;电机方向&#125;</span><br><span class="line">    O -- 正向 --&gt; P[设置控制引脚1高电平, 引脚2低电平]</span><br><span class="line">    O -- 反向 --&gt; Q[设置控制引脚1低电平, 引脚2高电平]</span><br><span class="line">    P &amp; Q --&gt; R&#123;电机使能状态&#125;</span><br><span class="line">    R -- 开启 --&gt; S[调节电机速度]</span><br><span class="line">    R -- 关闭 --&gt; T[关闭电机]</span><br><span class="line">    S &amp; T --&gt; U[更新上次开关状态]</span><br><span class="line">    U --&gt; V[更新上次方向状态]</span><br><span class="line">    V --&gt; C</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码-5"><a href="#5-实验代码-5" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化设置]
+    B --> C{主循环}
+    C --> D[读取电机开关状态]
+    D --> E[读取电机方向开关状态]
+    E --> F[读取电位器输入值]
+    F --> G{电机开关状态改变?}
+    G -- 是 --> H{电机开关打开?}
+    H -- 是 --> I[切换电机使能状态]
+    H -- 否 --> J[保持电机使能状态]
+    G -- 否 --> J
+    J --> K{电机方向开关状态改变?}
+    K -- 是 --> L{电机方向开关被触发?}
+    L -- 是 --> M[切换电机方向]
+    L -- 否 --> N[保持电机方向]
+    K -- 否 --> N
+    N --> O{电机方向}
+    O -- 正向 --> P[设置控制引脚1高电平, 引脚2低电平]
+    O -- 反向 --> Q[设置控制引脚1低电平, 引脚2高电平]
+    P & Q --> R{电机使能状态}
+    R -- 开启 --> S[调节电机速度]
+    R -- 关闭 --> T[关闭电机]
+    S & T --> U[更新上次开关状态]
+    U --> V[更新上次方向状态]
+    V --> C</pre>
 
 
 
@@ -594,7 +671,28 @@
 <img src="https://ae01.alicdn.com/kf/Ub79a9340c52343aaa2c1a9eb457f6f4fE.png" alt="img" style="zoom: 50%;" />
 
 <p>利用<strong>倾斜开关</strong>（内部带有一颗滚珠）控制电路的通断，当开关高于水平位置倾斜时开关导通，低于水平位置时开关断开。</p>
-<h3 id="5-实验代码-7"><a href="#5-实验代码-7" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A[开始] --&gt; B[初始化设置]</span><br><span class="line">    B --&gt; C&#123;主循环&#125;</span><br><span class="line">    C --&gt; D[读取开关状态]</span><br><span class="line">    D --&gt; E&#123;开关状态改变?&#125;</span><br><span class="line">    E -- 否 --&gt; F[保持当前显示]</span><br><span class="line">    E -- 是 --&gt; G&#123;开关状态为低电平?&#125;</span><br><span class="line">    G -- 否 --&gt; F</span><br><span class="line">    G -- 是 --&gt; H[生成随机数reply]</span><br><span class="line">    H --&gt; I[清除LCD显示]</span><br><span class="line">    I --&gt; J[显示&#x27;The ball says:&#x27;&#x27;]</span><br><span class="line">    J --&gt; K&#123;reply值&#125;</span><br><span class="line">    K -- 0 --&gt; L[显示&#x27;Yes&#x27;]</span><br><span class="line">    K -- 1 --&gt; M[显示&#x27;Most likely&#x27;]</span><br><span class="line">    K -- 2 --&gt; N[显示&#x27;Certainly&#x27;]</span><br><span class="line">    K -- 3 --&gt; O[显示&#x27;Outlook good&#x27;]</span><br><span class="line">    K -- 4 --&gt; P[显示&#x27;Unsure&#x27;]</span><br><span class="line">    K -- 5 --&gt; Q[显示&#x27;Ask again&#x27;]</span><br><span class="line">    K -- 6 --&gt; R[显示&#x27;Doubtful&#x27;]</span><br><span class="line">    K -- 7 --&gt; S[显示&#x27;No&#x27;]</span><br><span class="line">    L &amp; M &amp; N &amp; O &amp; P &amp; Q &amp; R &amp; S --&gt; T[更新上次开关状态]</span><br><span class="line">    T --&gt; C</span><br></pre></td></tr></table></figure>
+<h3 id="5-实验代码-7"><a href="#5-实验代码-7" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A[开始] --> B[初始化设置]
+    B --> C{主循环}
+    C --> D[读取开关状态]
+    D --> E{开关状态改变?}
+    E -- 否 --> F[保持当前显示]
+    E -- 是 --> G{开关状态为低电平?}
+    G -- 否 --> F
+    G -- 是 --> H[生成随机数reply]
+    H --> I[清除LCD显示]
+    I --> J[显示'The ball says:'']
+    J --> K{reply值}
+    K -- 0 --> L[显示'Yes']
+    K -- 1 --> M[显示'Most likely']
+    K -- 2 --> N[显示'Certainly']
+    K -- 3 --> O[显示'Outlook good']
+    K -- 4 --> P[显示'Unsure']
+    K -- 5 --> Q[显示'Ask again']
+    K -- 6 --> R[显示'Doubtful']
+    K -- 7 --> S[显示'No']
+    L & M & N & O & P & Q & R & S --> T[更新上次开关状态]
+    T --> C</pre>
 
 
 
