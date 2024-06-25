@@ -179,7 +179,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2024-06-25 21:02:40</span>
+        <span class="pc">2024-06-25 21:04:34</span>
     </span>
     
     
@@ -248,14 +248,18 @@
 <p>注意：连接 LED 灯时，要注意正负极。</p>
 <h3 id="4-实验原理"><a href="#4-实验原理" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>Arduino 的数字管脚只能读取两种状态：<strong>有电压</strong>和<strong>没有电压</strong> 。这种类型的输入一般叫数字信号输入。有电压和没有电压一般使用 HIGH (高电平)和 LOW (低电平)来表示(有时也用真假，数字1和0来表示高电平和低电平)。 HIGH 代表“有电压”。 LOW 代表“没有电压”。当想让一个输出管脚输出 HIGH ，需要使用<code>digitalWrite()</code>这个函数。当运行后，这个数字管脚与地之间有 5 V 的电压（电位差）。当让一个输出管脚输出 LOW ，则会关闭输出。</p>
 <p>Arduino 的数字式管脚既可以作为输入，也可以作为输出。可以在代码中根据函数来配置它们。当管脚是输出时，可以使用它打开像LED这样的器件。如果配置管脚作为输入，能检查开关是否被按下。因为管脚 0 和 1 已经被用来和计算机通信，最好从管脚2开始使用。</p>
-<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
-    A --> B;
-    B --> C;
-    C --> D;</pre>
+<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">flowchart TD;
+    A(开始) --> B[初始化引脚模式];
+    B --> C[读取按键状态];
+    C --> D{按键被按下？};
+    D -- 否 --> E[绿色LED点亮];
+    E --> F[红色LED1熄灭];
+    F --> G[红色LED2熄灭];
+    G --> C;
+    D -- 是 --> H[执行相关亮灭操作];
+    H --> C;</pre>
 
-
-
-
+<p>xxxxx</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> switchState = <span class="number">0</span>; <span class="comment">// 定义并初始化一个整型变量 switchState，用于存储按键状态</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 设置引脚模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">3</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚3设置为输出模式，用于控制绿色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">4</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚4设置为输出模式，用于控制红色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">5</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚5设置为输出模式，用于控制红色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">2</span>, <span class="literal">INPUT</span>);  <span class="comment">// 将引脚2设置为输入模式，用于读取按键状态</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 读取按键状态</span></span><br><span class="line">  switchState = <span class="built_in">digitalRead</span>(<span class="number">2</span>); <span class="comment">// 将引脚2的数字状态（按键状态）读取到 switchState 变量中</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据按键状态控制LED灯的亮灭</span></span><br><span class="line">  <span class="keyword">if</span> (switchState == <span class="literal">LOW</span>) &#123; <span class="comment">// 如果按键没有被按下</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">HIGH</span>); <span class="comment">// 点亮绿色LED（引脚3）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);  <span class="comment">// 熄灭红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">LOW</span>);  <span class="comment">// 熄灭红色LED（引脚5）</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果按键被按下</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭绿色LED（引脚3）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">HIGH</span>);  <span class="comment">// 点亮红色LED（引脚5）</span></span><br><span class="line">    <span class="built_in">delay</span>(<span class="number">250</span>); <span class="comment">// 延时四分之一秒</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 控制LED的闪烁</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">HIGH</span>);  <span class="comment">// 点亮红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭红色LED（引脚5）</span></span><br><span class="line">    <span class="built_in">delay</span>(<span class="number">250</span>); <span class="comment">// 延时四分之一秒</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;<span class="comment">//返回loop函数开始位置</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="6-实验结果"><a href="#6-实验结果" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/23/iwx1aLKtmeyGYlO.gif" alt="f7d74864ed75a476c97bfd09f1bd0b9d"></p>
