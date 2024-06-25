@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Pomegranate20">
+    
+    <title>
+        
+            《基于开源Arduino的数字系统设计》实验报告 |
+        
+        石榴的求知之旅
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"pomegranate20.github.io","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066cc","logo":"/images/logo.svg","favicon":"/images/logo.svg","avatar":"/images/avatar.svg","font_size":null,"font_family":null,"hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving.","font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":false}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":false},"comment":{"enable":true,"use":"valine","valine":{"appid":"u2xSHm0h4SZErdNKVsbJBRyV-gzGzoHsz","appkey":"bTjqpv8aroXqRhgzdHCt2xTJ","server_urls":"https://u2xshm0h.lc-cn-n1-shared.com","placeholder":"来输入你的评论！"},"gitalk":{"github_id":"pomegranate20","github_admins":"pomegranate20","repository":"blog-comment","client_id":"fe7c0af7440132c6099e","client_secret":"88a0a23882b26530f46069b3d625823200e8c433"},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["一个小学生"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"left","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="logo-title" href="/">
+               石榴的求知之旅
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archive"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archive">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">《基于开源Arduino的数字系统设计》实验报告</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Pomegranate20</span>
+                            
+                                <span class="author-label">一个小学生</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2024-06-25 21:35:29</span>
+        <span class="mobile">2024-06-25 21:35</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2024-06-25 21:38:37</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Arduino/">Arduino</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="基于开源-Arduino-的数字系统设计实验报告"><a href="#基于开源-Arduino-的数字系统设计实验报告" class="headerlink" title="基于开源 Arduino 的数字系统设计实验报告"></a>基于开源 Arduino 的数字系统设计<br>实验报告</h1><h2 id="课程情况概述"><a href="#课程情况概述" class="headerlink" title="课程情况概述"></a>课程情况概述</h2><h3 id="小组成员及课堂分工"><a href="#小组成员及课堂分工" class="headerlink" title="小组成员及课堂分工"></a>小组成员及课堂分工</h3><table>
+<thead>
+<tr>
+<th align="center">姓名</th>
+<th align="center">学号</th>
+<th align="center">分工</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">刘诺鸿</td>
+<td align="center">2022303984</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">金徐辉</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="课程总目标"><a href="#课程总目标" class="headerlink" title="课程总目标"></a>课程总目标</h3><ol>
+<li>了解 Arduino 的基本原理和使用方法。</li>
+<li>掌握使用 Arduino 进行数字系统设计的方法。</li>
+<li>提高动手能力和实践能力。</li>
+<li>培养团队协作精神。</li>
+</ol>
+<h2 id="实验一、太空船控制器"><a href="#实验一、太空船控制器" class="headerlink" title="实验一、太空船控制器"></a>实验一、太空船控制器</h2><h3 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>设计并制作一个 70 年代科幻电影中出现的“太空飞船控制中心”。 制作一块有开关和灯的控制面板, 通过按下开关改变灯的状态。通过 Arduino 的代码配置输入管脚检测开关闭合状态，配置输出引脚输出高低电压。学习掌握 Arduino 数字接口的相关知识。</p>
+<h3 id="2-实验器材"><a href="#2-实验器材" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">开关</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">LED 灯</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">220$\ohm$ 电阻</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">10 $k\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明"><a href="#3-硬件电路及连接说明" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><img src="https://s2.loli.net/2024/06/24/5GPHfqSDugw7bvK.jpg" alt="1" style="zoom: 40%;" />
+
+<p>连接面包板和 Arduino 的 5V 和地。放置两个红色 LED 和一个绿色 LED 在面包板上。将每个 LED 的负极(短引线)通过 220 欧姆电阻器连接到地。连接绿色 LED 的阳极(长引线)到管脚 3。分别连接两个红色 LED 的阳极到管脚 4和 5。放置一个开关在面包板上。一端连接到电源，另一端连接到 Arduino 的数字管脚 2。在开关连接到 Arduino 的那个管脚上增加一个 10 K 欧姆的电阻到地。</p>
+<p>注意：连接 LED 灯时，要注意正负极。</p>
+<h3 id="4-实验原理"><a href="#4-实验原理" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>Arduino 的数字管脚只能读取两种状态：<strong>有电压</strong>和<strong>没有电压</strong> 。这种类型的输入一般叫数字信号输入。有电压和没有电压一般使用 HIGH (高电平)和 LOW (低电平)来表示(有时也用真假，数字1和0来表示高电平和低电平)。 HIGH 代表“有电压”。 LOW 代表“没有电压”。当想让一个输出管脚输出 HIGH ，需要使用<code>digitalWrite()</code>这个函数。当运行后，这个数字管脚与地之间有 5 V 的电压（电位差）。当让一个输出管脚输出 LOW ，则会关闭输出。</p>
+<p>Arduino 的数字式管脚既可以作为输入，也可以作为输出。可以在代码中根据函数来配置它们。当管脚是输出时，可以使用它打开像LED这样的器件。如果配置管脚作为输入，能检查开关是否被按下。因为管脚 0 和 1 已经被用来和计算机通信，最好从管脚2开始使用。</p>
+<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化引脚模式]
+    B --> C[读取按键状态]
+    C --> D{按键被按下？}
+    D -- 否 --> E[绿色LED点亮]
+    E --> F[红色LED1熄灭]
+    F --> G[红色LED2熄灭]
+    G --> C
+    D -- 是 --> H[执行相关亮灭操作]
+    H --> C</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> switchState = <span class="number">0</span>; <span class="comment">// 定义并初始化一个整型变量 switchState，用于存储按键状态</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 设置引脚模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">3</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚3设置为输出模式，用于控制绿色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">4</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚4设置为输出模式，用于控制红色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">5</span>, <span class="literal">OUTPUT</span>); <span class="comment">// 将引脚5设置为输出模式，用于控制红色LED</span></span><br><span class="line">  <span class="built_in">pinMode</span>(<span class="number">2</span>, <span class="literal">INPUT</span>);  <span class="comment">// 将引脚2设置为输入模式，用于读取按键状态</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 读取按键状态</span></span><br><span class="line">  switchState = <span class="built_in">digitalRead</span>(<span class="number">2</span>); <span class="comment">// 将引脚2的数字状态（按键状态）读取到 switchState 变量中</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据按键状态控制LED灯的亮灭</span></span><br><span class="line">  <span class="keyword">if</span> (switchState == <span class="literal">LOW</span>) &#123; <span class="comment">// 如果按键没有被按下</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">HIGH</span>); <span class="comment">// 点亮绿色LED（引脚3）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);  <span class="comment">// 熄灭红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">LOW</span>);  <span class="comment">// 熄灭红色LED（引脚5）</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果按键被按下</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭绿色LED（引脚3）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">HIGH</span>);  <span class="comment">// 点亮红色LED（引脚5）</span></span><br><span class="line">    <span class="built_in">delay</span>(<span class="number">250</span>); <span class="comment">// 延时四分之一秒</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 控制LED的闪烁</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">HIGH</span>);  <span class="comment">// 点亮红色LED（引脚4）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">5</span>, <span class="literal">LOW</span>);   <span class="comment">// 熄灭红色LED（引脚5）</span></span><br><span class="line">    <span class="built_in">delay</span>(<span class="number">250</span>); <span class="comment">// 延时四分之一秒</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;<span class="comment">//返回loop函数开始位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果"><a href="#6-实验结果" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/23/iwx1aLKtmeyGYlO.gif" alt="f7d74864ed75a476c97bfd09f1bd0b9d"></p>
+<h2 id="实验二、爱情传感器"><a href="#实验二、爱情传感器" class="headerlink" title="实验二、爱情传感器"></a>实验二、爱情传感器</h2><h3 id="1-实验目的-1"><a href="#1-实验目的-1" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>当遇见女神&#x2F;男神心跳加速，体温上升；测量你手指的温度，按照高于环境温度的程度依次亮起 LED 灯；了解测温传感器 TMP36 （温度传感器的输出电压按照摄氏温度的一定比例变化）；学习掌握 Arduino 实现 A&#x2F;D 转换的知识。</p>
+<h3 id="2-实验器材-1"><a href="#2-实验器材-1" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">温度传感器 TMP36</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">LED 灯</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">220$\ohm$ 电阻</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-1"><a href="#3-硬件电路及连接说明-1" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/24/HRhzfEMrWbkeNax.png" alt="2"></p>
+<p>将每个LED的负极(短引线)通过一个220欧姆的电阻器连接到地。分别连接LED的阳极到管脚2至4，其在工程中充当指示器。将 TMP36 放置在面包板上，保持圆形那面背对Arduino，如图 2所示。连接平面那边的左侧引线到电源，右侧引线到地。连接中间的引线到 Arduino 的 A0 管脚。这是模拟输入管脚 0 。</p>
+<p>注意：LED 灯的正负极、TMP36 的引脚对应位置。</p>
+<h3 id="4-实验原理-1"><a href="#4-实验原理-1" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>即使Arduino是一个数字工具，它也能够从模拟传感器获取例如温度或光照强度等测量信息。要实现这一点，我们需要使用Arduino内置的模数转换器（ADC）。模拟引脚 A0 至 A5 能够提供0至1023范围内的数值，这些数值可以对应映射到0伏至5伏的电压范围内。</p>
+<p>我们将使用一个温度传感器来测量皮肤的温度。这种传感器会根据检测到的温度变化输出不同的电压值。它具有三个引脚：一个连接到地线，另一个连接到电源，第三个则输出一个变化的电压至 Arduino 。在这个项目中，我们将读取传感器的输出电压，并利用这个电压来控制 LED 的亮灭，以此表示温度的变化。市面上有多种类型的温度传感器，其中 TMP36 因其输出电压与摄氏度温度成正比的特性而非常方便使用。</p>
+<p>Arduino IDE内置了一个名为串口监视器的工具，它允许我们从微控制器接收反馈信息。通过串口监视器，我们可以获取传感器状态的实时信息，并了解在代码运行过程中电路的工作情况。</p>
+<h3 id="5-实验代码-1"><a href="#5-实验代码-1" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化串口通信]
+    B --> C[设置引脚2到引脚4为输出，
+并置为低电平]
+    C --> E[读取、打印传感器值]
+    E --> G[转换为电压值]
+    G --> I[转化为温度值]
+    I --> J{温度区间}
+    J -- <20℃ --> K[熄灭所有LED]
+    J -- 20℃-22℃ --> L[点亮LED1]
+    L --> M[熄灭LED2和LED3]
+    J -- 22℃-24℃ --> N[点亮LED1和LED2]
+    N --> O[熄灭LED3]
+    J -- >24℃ --> P[点亮所有LED]
+    K --> Q[延时1ms]
+    M --> Q
+    O --> Q
+    P --> Q
+    Q --> E</pre>
+
+
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> sensorPin = A0;  <span class="comment">// 定义传感器连接的引脚为A0</span></span><br><span class="line"><span class="type">const</span> <span class="type">float</span> baselineTemp = <span class="number">20.0</span>;  <span class="comment">// 定义基准温度为20.0摄氏度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">begin</span>(<span class="number">9600</span>);  <span class="comment">// 初始化串口通信，波特率为9600</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> pinNumber = <span class="number">2</span>; pinNumber &lt; <span class="number">5</span>; pinNumber++) &#123;  <span class="comment">// 循环设置引脚2到引脚4为输出，并置为低电平</span></span><br><span class="line">    <span class="built_in">pinMode</span>(pinNumber, <span class="literal">OUTPUT</span>);</span><br><span class="line">    <span class="built_in">digitalWrite</span>(pinNumber, <span class="literal">LOW</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// loop函数会一直循环执行</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> sensorVal = <span class="built_in">analogRead</span>(sensorPin);  <span class="comment">// 读取传感器的值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;Sensor Value:&quot;</span>);  <span class="comment">// 打印文本</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(sensorVal);  <span class="comment">// 打印传感器的值</span></span><br><span class="line">  <span class="type">float</span> voltage = (sensorVal / <span class="number">1024.0</span>) * <span class="number">5.0</span>;  <span class="comment">// 将传感器值转换为电压值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;, Volts:&quot;</span>);  <span class="comment">// 打印文本</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(voltage);  <span class="comment">// 打印电压值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;, degrees c:&quot;</span>);  <span class="comment">// 打印文本</span></span><br><span class="line">  <span class="comment">// 将电压值转换为以摄氏度为单位的温度值</span></span><br><span class="line">  <span class="type">float</span> temperature = (voltage<span class="number">-0.5</span>) * <span class="number">100</span>;</span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">println</span>(temperature);  <span class="comment">// 打印温度值并换行</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据温度值控制LED的状态，温度每升高2度，就多亮1个LED灯（温度区间左闭右开）</span></span><br><span class="line">  <span class="keyword">if</span> (temperature &lt; baselineTemp) &#123;  <span class="comment">// 如果温度低于基准温度（＜20℃）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">2</span>, <span class="literal">LOW</span>);  <span class="comment">// 将引脚2置为低电平，灯灭</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">LOW</span>);  <span class="comment">// 将引脚3置为低电平，灯灭</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);  <span class="comment">// 将引脚4置为低电平，灯灭</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temperature &gt;= baselineTemp + <span class="number">2</span> &amp;&amp; temperature &lt; baselineTemp + <span class="number">4</span>) &#123;  <span class="comment">// 如果温度在基准温度加2到基准温度加4之间（22~24℃）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">2</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚2置为高电平，灯亮</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">LOW</span>);   <span class="comment">// 将引脚3置为低电平，灯灭</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);   <span class="comment">// 将引脚4置为低电平，灯灭</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temperature &gt;= baselineTemp + <span class="number">4</span> &amp;&amp; temperature &lt; baselineTemp + <span class="number">6</span>) &#123;  <span class="comment">// 如果温度在基准温度加4到基准温度加6之间（24~26℃）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">2</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚2置为高电平，灯亮</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚3置为高电平，灯亮</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">LOW</span>);   <span class="comment">// 将引脚4置为低电平，灯灭</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (temperature &gt;= baselineTemp + <span class="number">6</span>) &#123;  <span class="comment">// 如果温度高于基准温度加6（＞26℃）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">2</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚2置为高电平，灯亮</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">3</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚3置为高电平，灯亮</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(<span class="number">4</span>, <span class="literal">HIGH</span>);  <span class="comment">// 将引脚4置为高电平，灯亮</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">1</span>);  <span class="comment">// 延时1毫秒</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-1"><a href="#6-实验结果-1" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/23/nZN9EKdc8V2xlSX.jpg" alt="087094b29cb62b863dee238ab014ac4"></p>
+<h2 id="实验三、混色灯"><a href="#实验三、混色灯" class="headerlink" title="实验三、混色灯"></a>实验三、混色灯</h2><h3 id="1-实验目的-2"><a href="#1-实验目的-2" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>测量红绿蓝三原色的亮度值；根据测量得出的亮度值来改变红绿蓝 LED 的亮度。了解混色光敏电阻-光线传感器、RGB 三色 LED 管；通过改变电压的高低，实现 LED 亮度的改变；学习了解  PWM  ，即脉冲宽度调制。</p>
+<h3 id="2-实验器材-2"><a href="#2-实验器材-2" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">4 引线 LED（RGB）</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">光敏电阻</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">220$\ohm$ 电阻</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">10 $k\ohm$ 电阻</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-2"><a href="#3-硬件电路及连接说明-2" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/PNGL3FRIivkrgZJ.png" alt="6"></p>
+<p>在面包板上布置三个光敏电阻，确保它们的两个引脚分别位于面包板的两侧，如图所示。将光敏电阻的一个引脚连接到电源，另一个引脚通过一个10千欧姆的电阻连接到地。这个电阻与光敏电阻串联，它们共同构成一个分压器。根据欧姆定律，连接点的电压会按照它们电阻的比例进行分配。当光敏电阻表面受到的光照发生变化时，其电阻值也会随之变化，进而导致连接点的电压发生变化。将光敏电阻与电阻同一侧的引脚通过导线连接到模拟引脚 0、1和2 。</p>
+<p>分别用三种颜色的塑料片覆盖在光敏电阻的表面。将红色塑料片覆盖在连接到A0引脚的光敏电阻上，绿色塑料片覆盖在连接到A1引脚的光敏电阻上，蓝色塑料片覆盖在连接到A2引脚的光敏电阻上。每种塑料片只允许与其颜色相对应的特定波长的光线通过，例如红色塑料片只允许红光通过，绿色塑料片只允许绿光通过，蓝色塑料片只允许蓝光通过。这样就可以检测出照射在传感器上的光的组成。</p>
+<p>注意：将 LED <strong>最长的引线</strong>插入面包板并连接到地，将另外三条引线分别通过220欧姆的电阻对应接到数字引脚9、10和11。</p>
+<h3 id="4-实验原理-2"><a href="#4-实验原理-2" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>Arduino不能改变输出管脚的电压，它只能输出 5V。 因此我们将需要使用一个称为脉冲宽度调制( PWM )的技术来改变LED的亮度。PWM 在一个固定的周期内快速地改变输出管脚的高低电平，其改变速度比人眼所能观察到的要快得多。它和电影工作的原理是相似的，即利用快速变化的静止图片来创造运动的错觉。</p>
+<p>迅速地改变管脚的电平可以实现我们改变输出电压的目的，进而调整 LED 的亮度。在一个周期中管脚电压高电平的时间所占的比例被称为占空比。Arduino Uno 有6个管脚可以被用来作为 PWM (数字管脚3,5,6,9,10和17)。在这个项目中，我们将使用光敏电阻(一种根据照射到它们表面的光强度来改变自身电阻的传感器)作为输入。如果我们将光敏电阻的一端连接到 Arduino 上，我们将可以通过检查管脚上的电压值来测试光敏电阻的阻值变化。</p>
+<p>该实验中所使用的 4引线 LED 具有4条引线，是一个共阴极 RGB LED。它内部包含独立的红色、绿色和蓝色发光元件，以及一个共用的地线（负极）。通过调整 Arduino 的 PWM （脉冲宽度调制）引脚（通过220欧姆的电阻接到阳极）与阴极之间的电压，可以控制LED三种颜色光线的亮度。</p>
+<h3 id="5-实验代码-2"><a href="#5-实验代码-2" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化串行通信]
+    B --> C[设置LED引脚
+为输出模式]
+    C --> D[读取红绿蓝
+三个传感器的值]
+    D --> I[输出原始传感器数值]
+    I --> J[将传感器值缩小四倍]
+    J --> L[输出映射后的传感器值，
+设置LED亮度]
+    L --> D</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义引脚变量，光敏电阻上放对应颜色的塑料片来充当传感器</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> greenLEDPin = <span class="number">9</span>;  <span class="comment">// 绿色LED的数字引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> redLEDPin = <span class="number">11</span>;   <span class="comment">// 红色LED的数字引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> blueLEDPin = <span class="number">10</span>;  <span class="comment">// 蓝色LED的数字引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> redSensorPin = A0;  <span class="comment">// 红色光线传感器的模拟引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> greenSensorPin = A1;  <span class="comment">// 绿色光线传感器的模拟引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> blueSensorPin = A2;  <span class="comment">// 蓝色光线传感器的模拟引脚</span></span><br><span class="line"><span class="comment">//电压值变量</span></span><br><span class="line"><span class="type">int</span> redValue = <span class="number">0</span>;  <span class="comment">// 存储红色值的变量</span></span><br><span class="line"><span class="type">int</span> greenValue = <span class="number">0</span>;  <span class="comment">// 存储绿色值的变量</span></span><br><span class="line"><span class="type">int</span> blueValue = <span class="number">0</span>;  <span class="comment">// 存储蓝色值的变量</span></span><br><span class="line"><span class="type">int</span> redSensorValue = <span class="number">0</span>;  <span class="comment">// 存储红色光线传感器读数的变量</span></span><br><span class="line"><span class="type">int</span> greenSensorValue = <span class="number">0</span>;  <span class="comment">// 存储绿色光线传感器读数的变量</span></span><br><span class="line"><span class="type">int</span> blueSensorValue = <span class="number">0</span>;  <span class="comment">// 存储蓝色光线传感器读数的变量</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">begin</span>(<span class="number">9600</span>);  <span class="comment">// 初始化串行通信，设置波特率为9600</span></span><br><span class="line">  <span class="built_in">pinMode</span>(greenLEDPin, <span class="literal">OUTPUT</span>);  <span class="comment">// 设置绿色LED引脚为输出模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(redLEDPin, <span class="literal">OUTPUT</span>);    <span class="comment">// 设置红色LED引脚为输出模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(blueLEDPin, <span class="literal">OUTPUT</span>);   <span class="comment">// 设置蓝色LED引脚为输出模式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主循环，会一直运行</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  redSensorValue = <span class="built_in">analogRead</span>(redSensorPin);  <span class="comment">// 读取红色光线传感器值</span></span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">5</span>);  <span class="comment">// 延迟5毫秒</span></span><br><span class="line">  greenSensorValue = <span class="built_in">analogRead</span>(greenSensorPin);  <span class="comment">// 读取绿色光线传感器值</span></span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">5</span>);  <span class="comment">// 延迟5毫秒</span></span><br><span class="line">  blueSensorValue = <span class="built_in">analogRead</span>(blueSensorPin);  <span class="comment">// 读取蓝色光线传感器值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;Raw Sensor Values \t Red:&quot;</span>);  <span class="comment">// 输出原始传感器数值，红色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(redSensorValue);  <span class="comment">// 输出红色光线传感器数值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;\t Green:&quot;</span>);  <span class="comment">// 输出原始传感器数值，绿色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(greenSensorValue);  <span class="comment">// 输出绿色光线传感器数值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;\t Blue:&quot;</span>);  <span class="comment">// 输出原始传感器数值，蓝色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">println</span>(blueSensorValue);  <span class="comment">// 输出蓝色光线传感器数值并换行</span></span><br><span class="line">  </span><br><span class="line">  redValue = redSensorValue / <span class="number">4</span>;  <span class="comment">// 将红色光线传感器值缩小四倍</span></span><br><span class="line">  greenValue = greenSensorValue / <span class="number">4</span>;  <span class="comment">// 将绿色光线传感器值缩小四倍</span></span><br><span class="line">  blueValue = blueSensorValue / <span class="number">4</span>;  <span class="comment">// 将蓝色光线传感器值缩小四倍</span></span><br><span class="line">  <span class="comment">//打印新的映射值（即上面缩小后所得的值）</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;Mapped Sensor Values \t Red:&quot;</span>);  <span class="comment">// 输出映射后的光线传感器数值，红色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(redValue);  <span class="comment">// 输出映射后的红色数值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;\t Green:&quot;</span>);  <span class="comment">// 输出映射后的光线传感器数值，绿色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(greenValue);  <span class="comment">// 输出映射后的绿色数值</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;\t Blue:&quot;</span>);  <span class="comment">// 输出映射后的光线传感器数值，蓝色部分</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">println</span>(blueValue);  <span class="comment">// 输出映射后的蓝色数值并换行</span></span><br><span class="line">  <span class="comment">//设置LED光线亮度</span></span><br><span class="line">  <span class="built_in">analogWrite</span>(redLEDPin, redValue);  <span class="comment">// 控制红色LED亮度</span></span><br><span class="line">  <span class="built_in">analogWrite</span>(greenLEDPin, greenValue);  <span class="comment">// 控制绿色LED亮度</span></span><br><span class="line">  <span class="built_in">analogWrite</span>(blueLEDPin, blueValue);  <span class="comment">// 控制蓝色LED亮度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-2"><a href="#6-实验结果-2" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/23/nZomjkgH9M2hsEO.png" alt="image-20240623235851511"></p>
+<h2 id="实验四、心情指示器"><a href="#实验四、心情指示器" class="headerlink" title="实验四、心情指示器"></a>实验四、心情指示器</h2><h3 id="1-实验目的-3"><a href="#1-实验目的-3" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>根据可变电位器的值来改变舵机的旋转角度；了解一种分压器件：可变电位器；掌握 Arduino 实现舵机控制的方法。</p>
+<h3 id="2-实验器材-3"><a href="#2-实验器材-3" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">100µf 电容器</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">可变电位器</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">舵机</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-3"><a href="#3-硬件电路及连接说明-3" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/7Uyi61KvEutxz3f.png" alt="5"></p>
+<p>将 Arduino 的5V和地（GND）连接到面包板的一侧。在面包板上放置一个可变电位器，并将电位器的一个引脚连接到5V，另一个引脚连接到地（GND）。</p>
+<p>舵机具有三根引线：一根是电源线（通常为红色），一根是地线（通常为黑色），第三根是控制线（通常为白色），它将接收来自Arduino的控制信号。将三个公端排针插入舵机线路的母端（参考图3），并将这些排针连接到面包板上，确保每个引脚位于不同的行。将 5V 连接到红色导线，地连接到黑色导线，同时将白色导线连接到数字引脚9。</p>
+<p>当舵机启动时，它会比正常运行时消耗更多的电流，这可能导致板子上的电压下降。为了使可能发生的所有电压波动更加平稳，可以在公端排针右侧的电源和地之间并联一个100μF电容器（如图1所示）。同样，我们也可以在电位器的电源和地之间并联一个电容器。这些电容器用于减少或分离其他电路造成的波动，因此被称为去耦电容。</p>
+<p>注意：连接电容时，要注意正负极（长正短负），否则可能会爆炸。</p>
+<h3 id="4-实验原理-3"><a href="#4-实验原理-3" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>舵机是一种特殊的马达，不是整周旋转，而是移动到一个具体位置并且固定那里，直到其再次接收到移动的指令。舵机通常只转动 180 度（半圈）。电位器是一种分压器，当转动其旋钮时，可以改变中间引脚上的电压比例，从而经过映射，能够调整模拟信号输入引脚0的电压。利用这个原理，可以实现对于舵机位置的控制。</p>
+<p>在制作彩色混合灯时，我们可以通过对发光二极管（LED）进行脉冲宽度调制（PWM）来控制其亮度。同样，舵机也需要接收脉冲信号来指示它们应该转动到哪个角度。这些脉冲信号以固定的间隔发送，但其宽度会在1000微秒到2000微秒之间变化。</p>
+<p>我们可以编写代码来生成这些脉冲，而且 Arduino 软件提供了 Servo 库，使得控制舵机变得更加简单。由于舵机的转动范围限制在180度，而模拟信号的输入范围是0到1023，因此我们需要使用一个名为<code>map()</code>的函数来调整从电位器读取的值，以适应这个范围。</p>
+<h3 id="5-实验代码-3"><a href="#5-实验代码-3" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化舵机和串行通信]
+    B --> C[读取模拟输入引脚值]
+    C --> D[输出模拟输入值]
+    D --> E[将输入值映射到角度]
+    E --> F[输出角度值]
+    F --> G[将舵机转到映射角度]
+    G --> H[延迟15ms]
+    H --> C</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Servo.h&gt;</span> <span class="comment">// 导入 Servo 库，用于控制舵机</span></span></span><br><span class="line"><span class="built_in">Servo</span> myServo; <span class="comment">// 创建 Servo 库的对象 myServo</span></span><br><span class="line"><span class="type">int</span> <span class="type">const</span> potPin = A0; <span class="comment">// 声明并初始化常量 potPin，用于存储模拟输入的引脚 A0</span></span><br><span class="line"><span class="type">int</span> potVal; <span class="comment">// 声明变量 potVal，用于存储模拟输入的数值</span></span><br><span class="line"><span class="type">int</span> angle; <span class="comment">// 声明变量 angle，用于存储舵机的角度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">  myServo.<span class="built_in">attach</span>(<span class="number">9</span>); <span class="comment">// 将舵机连接到数字引脚 9</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">begin</span>(<span class="number">9600</span>); <span class="comment">// 初始化串行通信，波特率为 9600</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在loop()函数中，读取模拟信号输入值并且把它打印到串口监视器。</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">  potVal = <span class="built_in">analogRead</span>(potPin); <span class="comment">// 读取模拟输入引脚 A0 的数值，并存储到变量 potVal 中</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;potVal:&quot;</span>); <span class="comment">// 输出字符 &quot;potVal:&quot;</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(potVal); <span class="comment">// 输出变量 potVal 的值</span></span><br><span class="line">  angle = <span class="built_in">map</span>(potVal, <span class="number">0</span>, <span class="number">1023</span>, <span class="number">0</span>, <span class="number">179</span>); <span class="comment">// 将 potVal 的值从范围 [0, 1023] 按比例映射到 [0, 179]，并存储到变量 angle 中</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">print</span>(<span class="string">&quot;,angle:&quot;</span>); <span class="comment">// 输出字符 &quot;,angle:&quot;</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">println</span>(angle); <span class="comment">// 输出变量 angle 的值，并换行</span></span><br><span class="line">  myServo.<span class="built_in">write</span>(angle); <span class="comment">// 将舵机转到角度 angle</span></span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">15</span>); <span class="comment">// 延迟 15 毫秒</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-3"><a href="#6-实验结果-3" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><img src="https://s2.loli.net/2024/06/24/amFqdLcQu1tU947.gif" alt="fdf7389b6304ce085d3f -small-original" style="zoom:150%;" />
+
+<img src="https://s2.loli.net/2024/06/23/chFoOVNz2wBr4pv.jpg" style="zoom: 25%;" />
+
+<h2 id="实验五、电动纸风车"><a href="#实验五、电动纸风车" class="headerlink" title="实验五、电动纸风车"></a>实验五、电动纸风车</h2><h3 id="1-实验目的-4"><a href="#1-实验目的-4" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>使用开关控制马达的开启，按下开启，松开停止；学习驱动马达电机、判断直接使用 IO 口是否可行；了解控制大功率用电器的常用解决方案：嵌入式处理器的 IO 口通常只有几十毫安，无法直接驱动马达，需使用继电器或者晶体管，由单片机的 IO 口控制继电器或晶体管的通断；了解马达断电后的反向电动势，可通过反向并联一个二极管消除，连接感性负载时注意反向电动势的影响。</p>
+<h3 id="2-实验器材-4"><a href="#2-实验器材-4" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">10 $k\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">按键开关</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">马达</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">9V电源</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">晶体管</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">二极管</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-4"><a href="#3-硬件电路及连接说明-4" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/s9Rr6ZCewpMOSDA.png" alt="3"></p>
+<p>首先，通过Arduino将电源和地连接到面包板上。然后，在面包板上增加一个瞬时开关，并将开关的一端连接到电源，另一端连接到Arduino的数字管脚2。在开关的输出端添加一个10KΩ的下拉电阻，连接到地。</p>
+<p>当我们在电路中使用不同电压的电源时，需要将它们的地线连接在一起，以形成一个共地。将9V电池夹固定在面包板上，并使用跳线将电池的地线和面包板的地线相连，如示意图1所示。接着，将电机的空闲引脚连接到9V电源。</p>
+<p>接下来，将晶体管放置在面包板上。确保在查看元件时，晶体管的金属片朝向我们。将Arduino的数字管脚9连接到晶体管的左侧管脚，这个管脚称为栅极。栅极上的电压变化会影响晶体管其他两个管脚之间的电路连接。将电机的一端连接到晶体管的中间管脚，这个管脚称为漏极。当 Arduino 向栅极提供电压以激活晶体管时，漏极将与第三个管脚（称为源极）导通。将源极连接到地。</p>
+<p>然后，将电机的电源线连接到电机和面包板上。最后增加的元件是二极管。二极管是一个具有单向导电性的元件。注意二极管的一端带有条纹，这是二极管的负极（或阴极），另一端是正极（或阳极）。将二极管的阳极连接到电机的地线，阴极连接到电机的电源线。如示意图1所示，这看起来可能不正确，但实际上是为了防止电机产生的所有反向电压进入我们的电路。请记住，反向电压的方向与我们提供的电压方向相反。</p>
+<p>注意：连接 二极管时，要注意正负极。要注意共地。</p>
+<h3 id="4-实验原理-4"><a href="#4-实验原理-4" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p><strong>晶体管</strong>是一种半导体器件，它允许我们使用Arduino的微小电流输出来控制较大的电流和高电压电源。尽管晶体管有多种类型，但它们的基本原理是相同的。可以将晶体管想象成一个数字开关。当向晶体管的栅极管脚提供电压时，它将控制源极和漏极之间的电路连接。这样，我们就可以使用Arduino来控制大电流或高电压的电机了。</p>
+<p>电机是一种利用电磁感应原理工作的装置。电磁感应是通过改变导线中的电流来在导线周围产生变化磁场的过程。当电机通电时，内部的铜线圈就会产生一个磁场。这个磁场使得传动轴旋转起来。</p>
+<h3 id="5-实验代码-4"><a href="#5-实验代码-4" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+A(开始) --> B[设置 motorPin 为输出]
+B --> C[设置 switchPin 为输入]
+C --> D[读取开关状态到 switchState]
+D --> E{switchState == HIGH?}
+E -- 是 --> F[启动电机]
+E -- 否 --> G[关闭电机]
+F & G --> H[等待一段时间]
+H --> D</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> switchPin = <span class="number">2</span>; <span class="comment">// 声明一个常量整型变量 switchPin，其值为 2，表示开关引脚连接到 Arduino 的第 2 号引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> motorPin = <span class="number">10</span>; <span class="comment">// 声明一个常量整型变量 motorPin，其值为 9，表示电机引脚连接到 Arduino 的第 9 号引脚</span></span><br><span class="line"><span class="type">int</span> switchState = <span class="number">0</span>; <span class="comment">// 声明一个整型变量 switchState，用于存储开关的状态，初始化为 0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">pinMode</span>(motorPin, <span class="literal">OUTPUT</span>); <span class="comment">// 设置 motorPin 引脚为输出模式，用于控制电机</span></span><br><span class="line">  <span class="built_in">pinMode</span>(switchPin, <span class="literal">INPUT</span>); <span class="comment">// 设置 switchPin 引脚为输入模式，用于读取开关状态</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  switchState = <span class="built_in">digitalRead</span>(switchPin); <span class="comment">// 读取开关引脚的状态，将状态值存储到 switchState 变量中</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (switchState == <span class="literal">HIGH</span>) &#123; <span class="comment">// 如果开关状态为高电平（即开关打开）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(motorPin, <span class="literal">HIGH</span>); <span class="comment">// 将电机引脚输出高电平，启动电机</span></span><br><span class="line">    </span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果开关状态为低电平（即开关关闭）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(motorPin, <span class="literal">LOW</span>); <span class="comment">// 将电机引脚输出低电平，关闭电机</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-4"><a href="#6-实验结果-4" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/24/cdN8Tm7BXfzovjI.gif" alt="66710e5ec89cd97daca0d0d35cd1547f"></p>
+<h2 id="实验六、幻影箱"><a href="#实验六、幻影箱" class="headerlink" title="实验六、幻影箱"></a>实验六、幻影箱</h2><h3 id="1-实验目的-5"><a href="#1-实验目的-5" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>在互联网、电视甚至电影出现之前，一些早期的动态影像是通过一种称为幻影箱（Phantascope）的工具制作的。幻影箱利用一系列细微差别的静态图像来创造运动的错觉。这些图像通常被放置在一个带有裂缝的圆柱形筒体上。当筒体旋转时，通过裂缝观察对面的静态图案，会产生一种图案在移动的错觉。裂缝的作用是防止图像变得模糊，而筒体的旋转则让图像看起来像是在动。最初，这些新奇的设备是手动旋转的，或者使用一个手摇装置来驱动。</p>
+<p>在本次实验中，我们使用一个开关来控制电机的启动和旋转方向；使用一个电位器来调节电机的转速；通过调整电压的大小来控制电机的转速；利用 PWM（脉冲宽度调制）输出来控制转速；通过改变电压的极性来控制电机的旋转方向；使用晶体管来控制电机的启动和电压极性；最后，使用H桥芯片 L293D 来驱动电机，这个芯片包含了驱动晶体管和反向二极管。</p>
+<h3 id="2-实验器材-5"><a href="#2-实验器材-5" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">10 $k\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">9V电源</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">马达</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">电位器</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">H 桥芯片</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">瞬时开关</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-5"><a href="#3-硬件电路及连接说明-5" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/oe7gOpKDzT1yPbZ.png" alt="4"></p>
+<p>首先，我们将面包板的电源和地连接到Arduino。接下来，我们在面包板上增加两个瞬时开关，并将每个开关的一侧连接到电源。在每个开关的输出端串联一个10KΩ的电阻至地。连接到Arduino管脚4的开关用于控制电机的旋转方向，而连接到管脚5的开关控制电机的电源。</p>
+<p>然后，我们将一个电位器连接到面包板。电位器的一端连接到5V，另一端连接到地。中间的管脚连接到Arduino的模拟输入管脚0，这将用于控制电机的转速。将H桥放置在面包板上，确保它横跨面包板的中线（具体细节参见图2）。H桥的管脚1连接到Arduino的数字管脚9，这是H桥的使能管脚。接收到5V电压时，它将驱动电机；接收到0V电压时，它将停止电机。我们可以使用这个管脚来调整H桥的电压，进而调整电机的转速。H桥的管脚2连接到Arduino的数字管脚3，管脚7连接到数字管脚2。这些管脚用于与H桥通信，指示电机的旋转方向。如果管脚3为低电平且管脚2为高电平，电机将朝一个方向旋转。如果管脚2为低电平且管脚3为高电平，电机将朝相反方向旋转。如果两个管脚同时为高电平或低电平，电机将停止转动。H桥从管脚16获取电源，请将它连接到面包板的SV。将管脚4和管脚5连接到地。电机连接到H桥的管脚3和6。这两个管脚将根据发送到管脚2和7的信号来导通或关断。</p>
+<p>最后，我们将一个未连接电池的电池夹插入面包板上的其他电源网格。将Arduino的地连接到电池的地上。H桥的管脚8连接到电池电源，这是H桥驱动电机的能量来源。</p>
+<p>注意：共地连接、芯片方向（观察缺口位置）。</p>
+<h3 id="4-实验原理-5"><a href="#4-实验原理-5" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>在这个项目中，我们将亲手制作自己的幻影箱。我们将用一个电机来驱动它旋转。</p>
+<p>为了让这个系统更加高级，我们会增添一些控制功能：一个开关用于控制电机的旋转方向，另一个开关用于控制电机的电源供应，还有一个电位器用来调节电机的转速。在电动纸风车项目中，电机只能单向旋转。如果我们改变电机的电源和地线，电机就会反向旋转。然而，手动改变电机的旋转方向在实际操作中并不方便，因此我们将使用一种名为H桥的装置来实现这一功能。H桥是一种集成电路芯片（IC）。集成电路是一种将大量电路集成在一个小封装内的器件。它们便于安装，并且能够简化复杂的电路设计。</p>
+<p>我们可以通过 IC 外部的引脚来访问其内部的电路。不同的 IC 有不同的引脚数量，但并非所有引脚都会在电路中使用。有时，使用数字而非功能来标识这些引脚更为方便。观察 IC 时，有凹槽的一面是顶部。我们可以通过从左上角开始，沿着U型方向计数来识别引脚编号。</p>
+<h3 id="5-实验代码-5"><a href="#5-实验代码-5" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化设置]
+    B --> C{主循环}
+    C --> D[读取电机开关状态]
+    D --> E[读取电机方向开关状态]
+    E --> F[读取电位器输入值]
+    F --> G{电机开关状态改变?}
+    G -- 是 --> H{电机开关打开?}
+    H -- 是 --> I[切换电机使能状态]
+    H -- 否 --> J[保持电机使能状态]
+    G -- 否 --> J
+    J --> K{电机方向开关状态改变?}
+    K -- 是 --> L{电机方向开关被触发?}
+    L -- 是 --> M[切换电机方向]
+    L -- 否 --> N[保持电机方向]
+    K -- 否 --> N
+    N --> O{电机方向}
+    O -- 正向 --> P[设置控制引脚1高电平, 引脚2低电平]
+    O -- 反向 --> Q[设置控制引脚1低电平, 引脚2高电平]
+    P & Q --> R{电机使能状态}
+    R -- 开启 --> S[调节电机速度]
+    R -- 关闭 --> T[关闭电机]
+    S & T --> U[更新上次开关状态]
+    U --> V[更新上次方向状态]
+    V --> C</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> controlPin1 = <span class="number">2</span>;  <span class="comment">// 定义控制电机方向的引脚1</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> controlPin2 = <span class="number">3</span>;  <span class="comment">// 定义控制电机方向的引脚2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> enablePin = <span class="number">9</span>;     <span class="comment">// 定义电机使能引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> directionSwitchPin = <span class="number">4</span>;         <span class="comment">// 定义电机方向开关引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> onOffSwitchStateSwitchPin = <span class="number">5</span>;  <span class="comment">// 定义电机开关状态开关引脚</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> potPin = A0;        <span class="comment">// 定义电位器输入引脚</span></span><br><span class="line"><span class="type">int</span> onOffSwitchState = <span class="number">0</span>;     <span class="comment">// 存储电机开关状态</span></span><br><span class="line"><span class="type">int</span> previousOnOffSwitchState = <span class="number">0</span>;  <span class="comment">// 存储上一个电机开关状态</span></span><br><span class="line"><span class="type">int</span> directionSwitchState = <span class="number">0</span>;      <span class="comment">// 存储电机方向开关状态</span></span><br><span class="line"><span class="type">int</span> previousDirectionSwitchState = <span class="number">0</span>;  <span class="comment">// 存储上一个电机方向开关状态</span></span><br><span class="line"><span class="type">int</span> motorEnabled = <span class="number">0</span>;   <span class="comment">// 存储电机使能状态</span></span><br><span class="line"><span class="type">int</span> motorSpeed = <span class="number">0</span>;     <span class="comment">// 存储电机速度</span></span><br><span class="line"><span class="type">int</span> motorDirection = <span class="number">1</span>; <span class="comment">// 存储电机方向，默认为正向</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">pinMode</span>(directionSwitchPin, <span class="literal">INPUT</span>);  <span class="comment">// 设置电机方向开关引脚为输入模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(onOffSwitchStateSwitchPin, <span class="literal">INPUT</span>);  <span class="comment">// 设置电机开关状态开关引脚为输入模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(controlPin1, <span class="literal">OUTPUT</span>);  <span class="comment">// 设置控制电机方向引脚1为输出模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(controlPin2, <span class="literal">OUTPUT</span>);  <span class="comment">// 设置控制电机方向引脚2为输出模式</span></span><br><span class="line">  <span class="built_in">pinMode</span>(enablePin, <span class="literal">OUTPUT</span>);    <span class="comment">// 设置电机使能引脚为输出模式</span></span><br><span class="line">  <span class="built_in">digitalWrite</span>(enablePin, <span class="literal">LOW</span>);  <span class="comment">// 将电机使能引脚初始化为低电平</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  onOffSwitchState = <span class="built_in">digitalRead</span>(onOffSwitchStateSwitchPin);  <span class="comment">// 读取电机开关状态</span></span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">1</span>);  <span class="comment">// 等待1毫秒，防止读取到不稳定的值</span></span><br><span class="line">  directionSwitchState = <span class="built_in">digitalRead</span>(directionSwitchPin);  <span class="comment">// 读取电机方向开关状态</span></span><br><span class="line">  motorSpeed = <span class="built_in">analogRead</span>(potPin) / <span class="number">4</span>;  <span class="comment">// 读取电位器输入值，并将其映射到0-255范围内</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (onOffSwitchState != previousOnOffSwitchState) &#123;  <span class="comment">// 如果电机开关状态改变</span></span><br><span class="line">    <span class="keyword">if</span> (onOffSwitchState == <span class="literal">HIGH</span>) &#123;  <span class="comment">// 如果电机开关打开</span></span><br><span class="line">      motorEnabled = !motorEnabled;  <span class="comment">// 切换电机使能状态</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (directionSwitchState != previousDirectionSwitchState) &#123;  <span class="comment">// 如果电机方向开关状态改变</span></span><br><span class="line">    <span class="keyword">if</span> (directionSwitchState == <span class="literal">HIGH</span>) &#123;  <span class="comment">// 如果电机方向开关处于高电平（被触发）</span></span><br><span class="line">      motorDirection = !motorDirection;  <span class="comment">// 切换电机方向</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (motorDirection == <span class="number">1</span>) &#123;  <span class="comment">// 如果电机方向为正向</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(controlPin1, <span class="literal">HIGH</span>);  <span class="comment">// 设置控制电机方向引脚1为高电平</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(controlPin2, <span class="literal">LOW</span>);   <span class="comment">// 设置控制电机方向引脚2为低电平</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 否则（电机方向为反向）</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(controlPin1, <span class="literal">LOW</span>);   <span class="comment">// 设置控制电机方向引脚1为低电平</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(controlPin2, <span class="literal">HIGH</span>);  <span class="comment">// 设置控制电机方向引脚2为高电平</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (motorEnabled == <span class="number">1</span>) &#123;  <span class="comment">// 如果电机使能状态为开启</span></span><br><span class="line">    <span class="built_in">analogWrite</span>(enablePin, motorSpeed);  <span class="comment">// 控制电机使能引脚输出对应的PWM信号，调节电机速度</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 否则（电机使能状态为关闭）</span></span><br><span class="line">    <span class="built_in">analogWrite</span>(enablePin, <span class="number">0</span>);  <span class="comment">// 将电机使能引脚输出PWM信号设置为0，关闭电机</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  previousDirectionSwitchState = directionSwitchState;  <span class="comment">// 更新上一个电机方向开关状态</span></span><br><span class="line">  previousOnOffSwitchState = onOffSwitchState;          <span class="comment">// 更新上一个电机开关状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-5"><a href="#6-实验结果-5" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="E:\edge_download\c5a93a9d2f7d6732f57aed905b55b85b.gif" alt="c5a93a9d2f7d6732f57aed905b55b85b"></p>
+<h2 id="实验七、触摸感应灯"><a href="#实验七、触摸感应灯" class="headerlink" title="实验七、触摸感应灯"></a>实验七、触摸感应灯</h2><h3 id="1-实验目的-6"><a href="#1-实验目的-6" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>本项目旨在通过 CapacitiveSensor 库实现电容式触摸按键的构建，并利用该按键控制LED灯的亮灭。 CapacitiveSensor 库由Paul Badger 编写，能够测量人体与金属物体接触时的电容变化。电容是衡量物体存储电荷能力的一种物理量，而本项目中，Arduino的两个管脚——发送管脚和接收管脚——将用于检测人体靠近时电容的变化。</p>
+<h3 id="2-实验器材-6"><a href="#2-实验器材-6" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">220$\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">10 M$\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">LED</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">触摸传感器<a href="%E6%9C%AC%E5%AE%9E%E9%AA%8C%E4%B8%AD%E7%94%A8%E5%AF%BC%E7%BA%BF%E5%85%85%E5%BD%93%E4%BC%A0%E6%84%9F%E5%99%A8%E3%80%82">^1</a></td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-6"><a href="#3-硬件电路及连接说明-6" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/SVsKqhvFtuHYAmc.jpg" alt="image-vmake (3)"></p>
+<p>连接一个 LED 到管脚 12 ，然后将负极通过一个 220Ω 的电阻连接到地。连接数字管脚 2 和 4 到面包板。这两个管脚中间连接一个 1MΩ 的电阻。从面包板上与管脚 2 相同的那行接出一条 8-10 厘米以上的导线，另外一端什么都不接。这将成为您的触摸传感器。</p>
+<p>注意：连接 LED 灯时，要注意正负极。 在这个项目中没有必要为您的面包板提供  5V 电源。数字管脚为传感器提供电流。</p>
+<h3 id="4-实验原理-6"><a href="#4-实验原理-6" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>电容式触摸按键基于人体电场效应，当人体接近金属物体时，人体会吸收部分电荷，从而影响Arduino管脚达到相同状态所需的时间。将Arduino的发送管脚和接收管脚连接至金属物体，如铝板，以形成电容式触摸传感器。本项目将采用电容式触摸按键电路，与电阻式触摸按键相比，电容式具有实现多点触控的优势，尽管其精度相对较低。当电容式触摸按键被人体接触时，Arduino将检测到电容的变化，并据此控制LED灯的亮灭状态：触摸时亮灯，未触摸时灭灯。在软件层面，我们将使用”CapacitiveSensor”库来读取电容值，并根据读数控制LED灯的状态。</p>
+<h3 id="5-实验代码-6"><a href="#5-实验代码-6" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A[开始] --> B[初始化设置]
+    B --> C{主循环}
+    C --> D[通过电容传感器获取电容值]
+    D --> E[在串口上打印传感器读数]
+    E --> F{电容值大于阈值?}
+    F -- 是 --> G[点亮LED]
+    F -- 否 --> H[关闭LED]
+    G & H --> I[延迟10毫秒]
+    I --> C</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;CapacitiveSensor.h&gt;</span> <span class="comment">// 导入 CapacitiveSensor 库，用于电容传感器</span></span></span><br><span class="line">CapacitiveSensor capSensor = <span class="built_in">CapacitiveSensor</span>(<span class="number">4</span>, <span class="number">2</span>); </span><br><span class="line"><span class="comment">// 创建一个 CapacitiveSensor 对象，将 4 号引脚连接到发送端，2 号引脚连接到接收端</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> threshold =<span class="number">1000</span>; <span class="comment">// 设置阈值为 1000</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ledPin = <span class="number">12</span>; <span class="comment">// 将 12 号引脚定义为 LED 控制引脚</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">begin</span>(<span class="number">9600</span>); <span class="comment">// 初始化串口通信，波特率设置为 9600</span></span><br><span class="line">  <span class="built_in">pinMode</span>(ledPin, <span class="literal">OUTPUT</span>); <span class="comment">// 将 LED 引脚设置为输出模式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">long</span> sensorValue = capSensor.<span class="built_in">capacitiveSensor</span>(<span class="number">30</span>); <span class="comment">// 通过电容传感器获取电容值，30 是想要读取的采样数量</span></span><br><span class="line">  <span class="built_in">Serial</span>.<span class="built_in">println</span>(sensorValue); <span class="comment">// 在串口上打印传感器读数</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sensorValue &gt; threshold) &#123; <span class="comment">// 如果电容值大于阈值</span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(ledPin, <span class="literal">HIGH</span>); <span class="comment">// 点亮 LED</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 如果小于阈值 </span></span><br><span class="line">    <span class="built_in">digitalWrite</span>(ledPin, <span class="literal">LOW</span>); <span class="comment">// 关闭 LED</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">delay</span>(<span class="number">10</span>); <span class="comment">// 延迟 10 毫秒</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-6"><a href="#6-实验结果-6" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><img src="https://s2.loli.net/2024/06/24/GEjHLkBb2fFXc8O.gif" alt="ecbd976652989b98778e -small-original" style="zoom:120%;" />
+
+<h2 id="实验八、水晶球"><a href="#实验八、水晶球" class="headerlink" title="实验八、水晶球"></a>实验八、水晶球</h2><h3 id="1-实验目的-7"><a href="#1-实验目的-7" class="headerlink" title="1. 实验目的"></a>1. 实验目的</h3><p>随机在液晶屏上显示预先定义的字符，每晃动一下变化一次，利用倾斜开关或者加速度计实现对晃动的感知；将液晶视为一个存储器件，实现液晶屏的显示；通过数据总线写入即可显示字符；使用 LiquidCrystal 库实现复杂的数据写入操作。</p>
+<h3 id="2-实验器材-7"><a href="#2-实验器材-7" class="headerlink" title="2. 实验器材"></a>2. 实验器材</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>实验材料名称</strong></th>
+<th align="center"><strong>数量</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Arduino UNO</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">面包板</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">倾斜开关</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">220 $\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">10 $k\ohm$ 电阻</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">电位器</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">LCD 屏</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h3 id="3-硬件电路及连接说明-7"><a href="#3-硬件电路及连接说明-7" class="headerlink" title="3. 硬件电路及连接说明"></a>3. 硬件电路及连接说明</h3><p><img src="https://s2.loli.net/2024/06/25/vDFOZBi2tEb1UJA.jpg" alt="image-vmake (2)"></p>
+<p>这个电路并不复杂，但涉及许多导线。在搭建电路时，我们要保持谨慎，确保连接正确。首先，将电源和地连接到旁边的面包板上。然后，放置一个倾斜开关到面包板上，并将一端连接到 5V 。另一端通过一个 10KΩ 的电阻连接到地，同时连接到 Arduino 的管脚6。我们将管脚6作为数字输入使用，这与我们在其他项目中的做法相同。</p>
+<p>寄存器选择(RS)管脚控制字符将显示在屏幕上的哪个位置。读写管脚(R&#x2F;W)决定屏幕的读写模式。在这个项目中，我们使用写模式。使能(EN)管脚通知 LCD 它将接收到一个指令。数据管脚(D0-D7)用来向屏幕发送字符数据。我们只需要使用4个数据管脚(D4-D7)。最后，有一个管脚用来调节显示的对比度。我们将使用一个电位器来控制它。</p>
+<p>Arduino 软件自带的 LiquidCrystal 库处理这些管脚的所有写入操作，并简化了显示字符的编码过程。LCD的两个外部管脚(Vss和LED-)需要连接到地。同时，将R&#x2F;W管脚连接到地，这将设置屏幕为写模式。将LCD的电源供应管脚(Vcc)直接连接到5V。将LED+管脚通过一个220Ω的电阻连接到电源。</p>
+<p>接线方面：Arduino数字管脚2连接到LCD的 D7 ，数字管脚3连接到LCD的 D6 ，数字管脚4连接到LCD的 D5 ，数字管脚5连接到LCD的 D4 。这些数据管脚用来告诉屏幕显示什么字符。将LCD的 EN 管脚连接到Arduino的管脚 11 。将LCD的RS管脚连接到Arduino的管脚 12 ，这个管脚使能写入 LCD 。</p>
+<p>在面包板上放置一个电位器，一端连接到电源，另一端连接到地。中间的管脚连接到LCD的 V0 管脚。这将允许我们改变屏幕的对比度。</p>
+<h3 id="4-实验原理-7"><a href="#4-实验原理-7" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>LCD通过改变两个极化滤光片之间的液晶的电子属性来工作。滤光片仅允许特定种类的光通过。当滤光片之间的液晶被加压ben后，它将开始进入半固体状态。这个新状态的方向和极化滤光片的方向不同，将会阻止光线通过，因此创造了在屏幕上看到的字符。本项目中使用的LCD屏幕16列2行，能够显示32个字符的东西。它有非常多的管脚。这些管脚被用来供电和通信，以便它知道在屏幕上显示什么，不过您不需要连接所有管脚。管脚连接方式见图。</p>
+<img src="https://ae01.alicdn.com/kf/Ub79a9340c52343aaa2c1a9eb457f6f4fE.png" alt="img" style="zoom: 50%;" />
+
+<p>利用<strong>倾斜开关</strong>（内部带有一颗滚珠）控制电路的通断，当开关高于水平位置倾斜时开关导通，低于水平位置时开关断开。</p>
+<h3 id="5-实验代码-7"><a href="#5-实验代码-7" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
+    A(开始) --> B[初始化设置]
+    B --> C{主循环}
+    C --> D[读取开关状态]
+    D --> E{开关状态改变?}
+    E -- 否 --> F[保持当前显示]
+    E -- 是 --> G{开关状态为低电平?}
+    G -- 否 --> F
+    G -- 是 --> H[生成随机数reply]
+    H --> I[清除LCD显示]
+    I --> J[显示'The ball says:'']
+    J --> K{reply值}
+    K -- 0 --> L[显示'Yes']
+    K -- 1 --> M[显示'Most likely']
+    K -- 2 --> N[显示'Certainly']
+    K -- 3 --> O[显示'Outlook good']
+    K -- 4 --> P[显示'Unsure']
+    K -- 5 --> Q[显示'Ask again']
+    K -- 6 --> R[显示'Doubtful']
+    K -- 7 --> S[显示'No']
+    L & M & N & O & P & Q & R & S --> T[更新上次开关状态]
+    T --> C</pre>
+
+
+
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;LiquidCrystal.h&gt;</span>  <span class="comment">// 导入 LiquidCrystal（即液晶） 库 </span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">LiquidCrystal</span> <span class="title">lcd</span><span class="params">(<span class="number">12</span>, <span class="number">11</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>)</span></span>;  <span class="comment">// 使用 LiquidCrystal 库创建 lcd 对象，指定引脚 12、11、5、4、3、2</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> switchPin = <span class="number">6</span>;  <span class="comment">// 定义开关接收的引脚为 6</span></span><br><span class="line"><span class="type">int</span> switchState = <span class="number">0</span>;  <span class="comment">// 初始化开关状态变量为 0</span></span><br><span class="line"><span class="type">int</span> preSwitchState = <span class="number">0</span>;  <span class="comment">// 初始化上一次开关状态变量为 0</span></span><br><span class="line"><span class="type">int</span> reply;  <span class="comment">// 声明变量 reply，用于存储回复信息</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  lcd.<span class="built_in">begin</span>(<span class="number">16</span>, <span class="number">2</span>);  <span class="comment">// 初始化 LCD 显示器，设置列数为 16，行数为 2</span></span><br><span class="line">  <span class="built_in">pinMode</span>(switchPin, <span class="literal">INPUT</span>);  <span class="comment">// 设置开关引脚为输入模式</span></span><br><span class="line">  lcd.<span class="built_in">print</span>(<span class="string">&quot;Ask the&quot;</span>);  <span class="comment">// 在第一行显示 &quot;Ask the&quot;</span></span><br><span class="line">  lcd.<span class="built_in">setCursor</span>(<span class="number">0</span>, <span class="number">1</span>);  <span class="comment">// 设置光标位置为第二行开头</span></span><br><span class="line">  lcd.<span class="built_in">print</span>(<span class="string">&quot;Crystal Ball&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Crystal Ball&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  switchState = <span class="built_in">digitalRead</span>(switchPin);  <span class="comment">// 读取开关状态并保存到 switchState 变量中</span></span><br><span class="line">  <span class="keyword">if</span> (switchState != preSwitchState) &#123;  <span class="comment">// 如果当前开关状态与上一次不同</span></span><br><span class="line">    <span class="keyword">if</span> (switchState == <span class="literal">LOW</span>) &#123;  <span class="comment">// 如果当前开关状态为低电平（按下）</span></span><br><span class="line">      reply = <span class="built_in">random</span>(<span class="number">8</span>);  <span class="comment">// 生成一个随机数，范围在 0 到 7 之间，并保存到 reply 变量中</span></span><br><span class="line">      lcd.<span class="built_in">clear</span>();  <span class="comment">// 清除 LCD 显示内容</span></span><br><span class="line">      lcd.<span class="built_in">setCursor</span>(<span class="number">0</span>, <span class="number">0</span>);  <span class="comment">// 设置光标位置为第一行开头</span></span><br><span class="line">      lcd.<span class="built_in">print</span>(<span class="string">&quot;The ball says:&quot;</span>);  <span class="comment">// 在第一行显示 &quot;The ball says:&quot;</span></span><br><span class="line">      lcd.<span class="built_in">setCursor</span>(<span class="number">0</span>, <span class="number">1</span>);  <span class="comment">// 设置光标位置为第二行开头</span></span><br><span class="line">      <span class="keyword">switch</span> (reply) &#123;  <span class="comment">// 根据 reply 的值进行不同的处理</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">//reply = 0 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Yes&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Yes&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">//reply = 1 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Most likely&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Most likely&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>: <span class="comment">//reply = 2 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Certainly&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Certainly&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>: <span class="comment">//reply = 3 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Outlook good&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Outlook good&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>: <span class="comment">//reply = 4 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Unsure&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Unsure&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>: <span class="comment">//reply = 5 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Ask again&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Ask again&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>: <span class="comment">//reply = 6 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;Doubtful&quot;</span>);  <span class="comment">// 在第二行显示 &quot;Doubtful&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>: <span class="comment">//reply = 7 时</span></span><br><span class="line">          lcd.<span class="built_in">print</span>(<span class="string">&quot;No&quot;</span>);  <span class="comment">// 在第二行显示 &quot;No&quot;</span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  preSwitchState = switchState;  <span class="comment">// loop()函数中做的最后一件事是更新上一次开关状态为当前状态，也就是将switchstate变量的值赋给prevSwitchstate变量。</span></span><br><span class="line">  <span class="comment">//这可以在下个1oop循环中跟踪开关的状态变化。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-实验结果-7"><a href="#6-实验结果-7" class="headerlink" title="6. 实验结果"></a>6. 实验结果</h3><p><img src="https://s2.loli.net/2024/06/24/CfNWz36GvuJMpYE.gif" alt="1b3640a04b6c0a8e6a95518038c50c4c"></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Arduino/">#Arduino</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E6%8A%80%E6%9C%AF/">#技术</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E4%BD%9C%E4%B8%9A/">#作业</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/12/06/hello-world/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+                <div class="comment-container">
+                    
+<div class="comments-container">
+    <div id="comments-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments"></i>&nbsp;评论
+    </div>
+    
+        
+            
+
+    <div class="valine-container">
+        <script data-pjax src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+          function loadValine() {
+
+            const config = {
+              el: '#vcomments',
+              appId: 'u2xSHm0h4SZErdNKVsbJBRyV-gzGzoHsz',
+              appKey: 'bTjqpv8aroXqRhgzdHCt2xTJ',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '来输入你的评论！',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('https://u2xshm0h.lc-cn-n1-shared.com') {
+              config.serverURLs = 'https://u2xshm0h.lc-cn-n1-shared.com'
+            }
+
+            new Valine(config)
+
+            function getAuthor(language) {
+              switch (language) {
+                case 'en':
+                  return 'Author'
+                case 'zh-CN':
+                  return '博主'
+                default:
+                  return 'Master'
+              }
+            }
+
+            // Add "Author" identify
+            const getValineDomTimer = setInterval(() => {
+              const vcards = document.querySelectorAll('#vcomments .vcards .vcard')
+              if (vcards.length > 0) {
+                let author = 'Pomegranate20'
+
+                if (author) {
+                  for (let vcard of vcards) {
+                    const vnick_dom = vcard.querySelector('.vhead .vnick')
+                    const vnick = vnick_dom.innerHTML
+                    if (vnick === author) {
+                      vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                    }
+                  }
+                }
+                clearInterval(getValineDomTimer)
+              } else {
+                clearInterval(getValineDomTimer)
+              }
+            }, 2000)
+          }
+
+          if ('true' === 'true') {
+            const loadValineTimeout = setTimeout(() => {
+              loadValine()
+              clearTimeout(loadValineTimeout)
+            }, 1000)
+          } else {
+            window.addEventListener('DOMContentLoaded', loadValine)
+          }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%BC%80%E6%BA%90-Arduino-%E7%9A%84%E6%95%B0%E5%AD%97%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A"><span class="nav-text">基于开源 Arduino 的数字系统设计实验报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E6%83%85%E5%86%B5%E6%A6%82%E8%BF%B0"><span class="nav-text">课程情况概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%84%E6%88%90%E5%91%98%E5%8F%8A%E8%AF%BE%E5%A0%82%E5%88%86%E5%B7%A5"><span class="nav-text">小组成员及课堂分工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%9B%AE%E6%A0%87"><span class="nav-text">课程总目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80%E3%80%81%E5%A4%AA%E7%A9%BA%E8%88%B9%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-text">实验一、太空船控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C%E3%80%81%E7%88%B1%E6%83%85%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="nav-text">实验二、爱情传感器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-1"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-1"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-1"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-1"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-1"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-1"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89%E3%80%81%E6%B7%B7%E8%89%B2%E7%81%AF"><span class="nav-text">实验三、混色灯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-2"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-2"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-2"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-2"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-2"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-2"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%9B%9B%E3%80%81%E5%BF%83%E6%83%85%E6%8C%87%E7%A4%BA%E5%99%A8"><span class="nav-text">实验四、心情指示器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-3"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-3"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-3"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-3"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-3"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-3"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%94%E3%80%81%E7%94%B5%E5%8A%A8%E7%BA%B8%E9%A3%8E%E8%BD%A6"><span class="nav-text">实验五、电动纸风车</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-4"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-4"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-4"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-4"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-4"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-4"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%85%AD%E3%80%81%E5%B9%BB%E5%BD%B1%E7%AE%B1"><span class="nav-text">实验六、幻影箱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-5"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-5"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-5"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-5"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-5"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-5"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%83%E3%80%81%E8%A7%A6%E6%91%B8%E6%84%9F%E5%BA%94%E7%81%AF"><span class="nav-text">实验七、触摸感应灯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-6"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-6"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-6"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-6"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-6"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-6"><span class="nav-text">6. 实验结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%85%AB%E3%80%81%E6%B0%B4%E6%99%B6%E7%90%83"><span class="nav-text">实验八、水晶球</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84-7"><span class="nav-text">1. 实验目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%99%A8%E6%9D%90-7"><span class="nav-text">2. 实验器材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8F%8A%E8%BF%9E%E6%8E%A5%E8%AF%B4%E6%98%8E-7"><span class="nav-text">3. 硬件电路及连接说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86-7"><span class="nav-text">4. 实验原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E9%AA%8C%E4%BB%A3%E7%A0%81-7"><span class="nav-text">5. 实验代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C-7"><span class="nav-text">6. 实验结果</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2023</span> -
+            
+            2024
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Pomegranate20</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+  <script src='https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+  <style>
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+<script src="https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
+
+<script type = "text/javascript" src="/js/leaves.js"></script>
+
+</body>
+</html>
