@@ -179,7 +179,7 @@
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2024-06-25 21:01:09</span>
+        <span class="pc">2024-06-25 21:02:40</span>
     </span>
     
     
@@ -248,7 +248,7 @@
 <p>注意：连接 LED 灯时，要注意正负极。</p>
 <h3 id="4-实验原理"><a href="#4-实验原理" class="headerlink" title="4. 实验原理"></a>4. 实验原理</h3><p>Arduino 的数字管脚只能读取两种状态：<strong>有电压</strong>和<strong>没有电压</strong> 。这种类型的输入一般叫数字信号输入。有电压和没有电压一般使用 HIGH (高电平)和 LOW (低电平)来表示(有时也用真假，数字1和0来表示高电平和低电平)。 HIGH 代表“有电压”。 LOW 代表“没有电压”。当想让一个输出管脚输出 HIGH ，需要使用<code>digitalWrite()</code>这个函数。当运行后，这个数字管脚与地之间有 5 V 的电压（电位差）。当让一个输出管脚输出 LOW ，则会关闭输出。</p>
 <p>Arduino 的数字式管脚既可以作为输入，也可以作为输出。可以在代码中根据函数来配置它们。当管脚是输出时，可以使用它打开像LED这样的器件。如果配置管脚作为输入，能检查开关是否被按下。因为管脚 0 和 1 已经被用来和计算机通信，最好从管脚2开始使用。</p>
-<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">flowchart TD;
+<h3 id="5-实验代码"><a href="#5-实验代码" class="headerlink" title="5. 实验代码"></a>5. 实验代码</h3><pre class="mermaid">graph TD;
     A --> B;
     B --> C;
     C --> D;</pre>
